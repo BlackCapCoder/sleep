@@ -1,0 +1,25 @@
+/* First 10 powers of 2 for convenience */
+.pow2 {
+  --pow0:  1;
+  --pow1:  calc(var(--pow0) * 2);
+  --pow2:  calc(var(--pow1) * 2);
+  --pow3:  calc(var(--pow2) * 2);
+  --pow4:  calc(var(--pow3) * 2);
+  --pow5:  calc(var(--pow4) * 2);
+  --pow6:  calc(var(--pow5) * 2);
+  --pow7:  calc(var(--pow6) * 2);
+  --pow8:  calc(var(--pow7) * 2);
+  --pow9:  calc(var(--pow8) * 2);
+  --pow10: calc(var(--pow9) * 2);
+}
+
+
+/* https://gist.github.com/stereokai/7666bfe93929b14c2dced148c79e0e97 */
+.sin {
+  --sin-term1: var(--sangle);
+  --sin-term2: calc((var(--sangle) * var(--sangle) * var(--sangle)) / 6);
+  --sin-term3: calc((var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle)) / 120);
+  --sin-term4: calc((var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle)) / 5040);
+  --sin-term5: calc((var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle) * var(--sangle)) / 362880);
+  --sin: calc(var(--sin-term1) - var(--sin-term2) + var(--sin-term3) - var(--sin-term4) + var(--sin-term5));
+}

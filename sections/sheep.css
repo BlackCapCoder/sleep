@@ -1,0 +1,77 @@
+/* ----------- Sheep section ------------ */
+
+/* Reduce the space between the sheep and the next section */
+/* to make it look less floaty */
+#sheep ~ section {
+  padding-top: 0;
+  margin-top: 20px;
+}
+
+/* For when the sheep is the last section. I cannot enforce this with */
+/* CSS alone, because I need to change the body */
+body {
+  margin-bottom: 10px;
+}
+.sheep-cont {
+  padding-top: 20px;
+}
+
+
+/* ----------- Sheep animation ------------ */
+
+.sheep-cont {
+  --speed: 12s;   /* Animation length */
+  --size:  100px; /* Sheep size (the image is square) */
+
+  /* The sheep has position absolute, so we give the */
+  /* container the height instead */
+  margin-top: var(--size);
+  height:     var(--size);
+
+  /* The `count10` animation outputs the integers 0-10 in `--i`. */
+  /* I use this to move the sheep forwards stepwise after each jump */
+  animation: count10 var(--anim) linear infinite;
+
+  /* There is a global switch to disable animations to save flops */
+  --anim: var(--disable-animations, var(--speed));
+}
+
+.sheep {
+  width:  var(--size);
+  height: var(--size);
+  filter: invert(1); /* The image is actually black */
+
+  /* Move the sheep 1/10th of the width of the screen */
+  /* after every jump */
+  left: calc(var(--size) * -1 + var(--i)/10 * (100% + var(--size)));
+  position: absolute;
+
+  /* We animate the movement with a transition, 1/20th speed because */
+  /* the actual jump is only half of the `jump` animation */
+  transition: left calc(var(--anim)/20) ease;
+
+  /* Actual jumping animation. 1/10th speed because it takes */
+  /* the sheep 10 jumps to make it across the screen */
+  animation: jump calc(var(--anim)/10) infinite ease-out;
+
+  /* Because we are using a transition to animate horizontal movement, */
+  /* the sheep will animate back in place when the animation restarts. */
+  /* We can get around this by setting the opacity to the jump counter, */
+  /* because 0 means transparent, and 1 or more means fully opaque. */
+  opacity: calc(var(--i));
+}
+
+
+@keyframes jump {
+
+  /* Bend down before jumping */
+  0%   { transform: rotate(  0deg); }
+  25%  { transform: rotate(  5deg); }
+  50%  { transform: rotate( 10deg); }
+
+  /* Angle up and jump */
+  75%  { transform: translateY(-100%) rotate(-40deg); }
+  90%  { transform: translateY( -20%) rotate( 35deg); }
+  100% { transform: translateY(    0) rotate(  0deg); }
+
+}

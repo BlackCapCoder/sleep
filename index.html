@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Sleep</title>
+
+    <!-- General -->
+    <link rel="stylesheet" href="main.css"/>
+    <link rel="stylesheet" href="math.css"/>
+    <link rel="stylesheet" href="count.css"/>
+
+    <!-- Controls -->
+    <link rel="stylesheet" href="controls/moon.css"/>
+    <link rel="stylesheet" href="controls/chart.css"/>
+    <link rel="stylesheet" href="controls/radiobutton.css"/>
+    <link rel="stylesheet" href="controls/clock.css"/>
+    <link rel="stylesheet" href="controls/split.css"/>
+
+    <!-- Sections -->
+    <link rel="stylesheet" href="sections/header.css"/>
+    <link rel="stylesheet" href="sections/abstract.css"/>
+    <link rel="stylesheet" href="sections/clock.css"/>
+    <link rel="stylesheet" href="sections/beds.css"/>
+    <link rel="stylesheet" href="sections/dreams.css"/>
+    <link rel="stylesheet" href="sections/sheep.css"/>
+
+  </head>
+  <body>
+
+    <!-- This needs to be at the very beginning of the DOM tree -->
+    <div id='main-moon' class='moon'>
+      <div class='white-part'></div>
+      <div class='black-part'></div>
+    </div>
+    <h1 class="title" id="moon-main-title">
+      <a href='' class="no-deco">Sleep</a>
+    </h1>
+
+    <header class="center">
+      <div id="top-part">
+        <div class='moon'>
+          <div class='white-part'></div>
+          <div class='black-part'></div>
+        </div>
+        <h1 class="title" id="main-title">
+          <a href="" class="no-deco">Sleep</a>
+        </h1>
+      </div>
+      <div id="top-menu">
+        <div class="wrapper">
+          <a class="no-deco" href="#abstract">Abstract</a>
+          <a class="no-deco" href="#clock">Clock</a>
+          <a class="no-deco" href="#beds">Beds</a>
+          <a class="no-deco" href="#dreams">Dreams</a>
+          <a class="no-deco" href="#sheep">Sheep</a>
+        </div>
+      </div>
+    </header>
+
+    <div id="main" class="center">
+      <section id="abstract">
+        <h2 class="title">Abstract</h2>
+
+        <div class="subsec">
+          <p>
+            Sleep is a wierd phenomena that occurs in most earth animals,
+            that involves spending a large amount of time laying in place
+            doing absolutely nothing.
+            How long an animal sleeps depends mostly on specie,
+            but also on how old it is.
+          </p>
+        </div>
+
+        <div class='chart-cont'>
+
+          <div id='colorcode-box'>
+            <div id="colorcode"><div></div></div>
+            <span>Recommended</span>
+          </div>
+
+          <div class="rb"       tabindex='0' id="see-age"><div></div></div>
+          <div class="rb"       tabindex='0' id="see-all" default><div></div></div>
+          <div class="rb space" tabindex='0' id="see-spi"><div></div></div>
+
+          <div class='wrapper'>
+            <div class="chart-box" name='humans'>
+              <h3 class='title'>Humans by age</h3>
+
+              <!-- The comments between lines are to fight the space
+                  between inline elements.
+                  I could get around this with `display: flex` and use
+                  `justify-contents: space-between` for the space that
+                  I actually want, but the latter is disallowed. -->
+
+              <div class='chart' id='chart-humans'><!--
+            --><div class='item'><span>Newborn</span><div></div></div><!--
+            --><div class='item'><span>Infant</span><div></div></div><!--
+            --><div class='item'><span>Toddler</span><div></div></div><!--
+            --><div class='item'><span>Preschooler</span><div></div></div><!--
+            --><div class='item'><span>School children</span><div></div></div><!--
+            --><div class='item'><span>Teen</span><div></div></div><!--
+            --><div class='item'><span>Adult</span><div></div></div><!--
+            --><div class='item'><span>Old</span><div></div></div><!--
+          --></div>
+            </div>
+
+            <div class="chart-box" name='animals'>
+              <h3 class='title'>Species</h3>
+              <div class='chart' id='chart-all'><!--
+            --><div class='item'><span>Brown Bat</span><div></div></div><!--
+            --><div class='item'><span>Giant Armadillo</span><div></div></div><!--
+            --><div class='item'><span>North American Opossum</span><div></div></div><!--
+            --><div class='item'><span>Python</span><div></div></div><!--
+            --><div class='item'><span>Owl Monkey</span><div></div></div><!--
+            --><div class='item'><span>Human (infant)</span><div></div></div><!--
+            --><div class='item'><span>Tiger</span><div></div></div><!--
+            --><div class='item'><span>Tree shrew</span><div></div></div><!--
+            --><div class='item'><span>Squirrel</span><div></div></div><!--
+            --><div class='item'><span>Western Toad</span><div></div></div><!--
+            --><div class='item'><span>Ferret</span><div></div></div><!--
+            --><div class='item'><span>Three-toed Sloth</span><div></div></div><!--
+            --><div class='item'><span>Golden Hamster</span><div></div></div><!--
+            --><div class='item'><span>Platypus</span><div></div></div><!--
+            --><div class='item'><span>Lion</span><div></div></div><!--
+            --><div class='item'><span>Gerbil</span><div></div></div><!--
+            --><div class='item'><span>Rat</span><div></div></div><!--
+            --><div class='item'><span>Cat</span><div></div></div><!--
+            --><div class='item'><span>Cheetah</span><div></div></div><!--
+            --><div class='item'><span>Mouse</span><div></div></div><!--
+            --><div class='item'><span>Rhesus Monkey</span><div></div></div><!--
+            --><div class='item'><span>Rabbit</span><div></div></div><!--
+            --><div class='item'><span>Jaguar</span><div></div></div><!--
+            --><div class='item'><span>Duck</span><div></div></div><!--
+            --><div class='item'><span>Dog</span><div></div></div><!--
+            --><div class='item'><span>Bottle-nosed dolphin</span><div></div></div><!--
+            --><div class='item'><span>Star-nosed Mole</span><div></div></div><!--
+            --><div class='item'><span>Baboon</span><div></div></div><!--
+            --><div class='item'><span>European Hedgehog</span><div></div></div><!--
+            --><div class='item'><span>Squirrel Monkey</span><div></div></div><!--
+            --><div class='item'><span>Chimpanzee</span><div></div></div><!--
+            --><div class='item'><span>Guinea Pig</span><div></div></div><!--
+            --><div class='item'><span>Human (adult)</span><div></div></div><!--
+            --><div class='item'><span>Pig</span><div></div></div><!--
+            --><div class='item'><span>Guppy (fish)</span><div></div></div><!--
+            --><div class='item'><span>Gray Seal</span><div></div></div><!--
+            --><div class='item'><span>Human (elderly)</span><div></div></div><!--
+            --><div class='item'><span>Goat</span><div></div></div><!--
+            --><div class='item'><span>Cow</span><div></div></div><!--
+            --><div class='item'><span>Asiatic Elephant</span><div></div></div><!--
+            --><div class='item'><span>Sheep</span><div></div></div><!--
+            --><div class='item'><span>African Elephant</span><div></div></div><!--
+            --><div class='item'><span>Donkey</span><div></div></div><!--
+            --><div class='item'><span>Horse</span><div></div></div><!--
+            --><div class='item'><span>Giraffe</span><div></div></div><!--
+          --></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="clock">
+        <h2 class="title">Clock</h2>
+        <div class="subsec split flip" id='clock-split'>
+
+          <div class="right">
+            <div class="clock" id='the-clock'>
+              <div class="digit" name= '1'><span>1</span></div>
+              <div class="digit" name= '2'><span>2</span></div>
+              <div class="digit" name= '3'><span>3</span></div>
+              <div class="digit" name= '4'><span>4</span></div>
+              <div class="digit" name= '5'><span>5</span></div>
+              <div class="digit" name= '6'><span>6</span></div>
+              <div class="digit" name= '7'><span>7</span></div>
+              <div class="digit" name= '8'><span>8</span></div>
+              <div class="digit" name= '9'><span>9</span></div>
+              <div class="digit" name='10'><span>10</span></div>
+              <div class="digit" name='11'><span>11</span></div>
+              <div class="digit" name='12'><span>12</span></div>
+
+              <div class="hand sec"><div></div></div>
+              <div class="hand min"><div></div></div>
+              <div class="hand hour"><div></div></div>
+            </div>
+          </div>
+
+          <div class="left">
+            <p>
+              Humans are obsessed with time.
+              All humans carry time keeping devices known as clocks,
+              and will schedule events relative to their state.
+            </p><p>
+              Humans have little control over how long they sleep for,
+              so they have invented clocks that set of alarms at specific
+              times, known as alarm clocks.
+            </p><p>
+              The alarm will force the human out of the state of sleep,
+              which they find extreamly unpleasant.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="beds">
+        <h2 class="title">Beds</h2>
+
+        <div class="subsec split">
+          <div class='left'>
+            <p>
+              Most humans own at least one sleeping station.
+              These are contained in dedicated sleeping rooms.
+            </p>
+            <p>
+              The bed is by far the most popular sleeping device. In the image on the right you can see a bed in its natural habitat- the bed room.
+            </p>
+          </div>
+
+          <div class='right'>
+            <img tabindex='0' class='enlarge' id='bed' src="imgs/bed.jpg" alt="bed" />
+            <div class='backdrop'></div>
+            <div class='focus-sink'></div>
+          </div>
+        </div>
+
+        <div class="subsec split flip">
+          <div class='right' id='portable'>
+            <img tabindex='0' class='enlarge' src="imgs/hammock.jpg" alt="hammock" />
+            <img tabindex='0' class='enlarge anti-pattern' src="imgs/sleepingbag.jpg" alt="sleepingbag" />
+            <img tabindex='0' class='enlarge' src="imgs/cardboardbox.jpg" alt="sleepingbag" />
+            <div class='backdrop'></div>
+            <div class='focus-sink'></div>
+          </div>
+
+          <div class='left'>
+            <p>
+              Sleeping devices does not have to be stationary, there are both psuedo-portable and fully portable options.
+            </p><p>
+              Generally speaking, the more portable a sleeping station is, the less comfortable.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="dreams">
+        <h2 class="title">Dreams</h2>
+
+        <p>
+          Most animals capable of cognition have dreams while in their sleeping state.
+          Dreams are superficial recreations of the world around them,
+          but as their brains are parially off they are seldom able to
+          detect this.
+        </p><p>
+          If they do, they enter what is called a lucid dream, which is
+          that they are able to control and shape the dream world around
+          them because they are aware of the fact that they are dreaming.
+        </p>
+
+        <!-- Javascript is disallowed, so this contains literally 200 particle divs -->
+        <div id='dream-box'>
+          <div class="dream pow2 r1000">
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+            <div class='particle sin'></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sheep">
+        <h2 class="title">Sheep</h2>
+        <div>
+          <p>
+            A popular activity amongst humans is to count sheep.
+            Some times they use real sheep, and some times they simply imagine them.
+            Reportedy this activity helps the humans fall asleep.
+          </p>
+        </div>
+
+        <div class="sheep-cont">
+          <img class='sheep sin cos tan' src="imgs/sheep.png" />
+        </div>
+      </section>
+
+    </div> <!-- #main -->
+  </body>
+</html>
+

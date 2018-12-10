@@ -1,0 +1,59 @@
+/*
+  Input elements are disallowed, but I can implement
+  radiobuttons using :focus
+
+  A flaw with this is that the radio buttons are de-selected
+  if the user clicks off.
+
+  I also tried a combination of :hover, :active
+  and a fullscreen, transparent `position: fixed`
+  div to hold the focus.
+
+  This has the obvious flaw that it consumes pointer events.
+
+
+HTML:
+
+  <div class="rb" tabindex='0'><div></div></div>
+  <div class="rb" tabindex='0'><div></div></div>
+  <div class="rb" tabindex='0' default><div></div></div>
+
+*/
+
+
+.rb {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  /* border-radius: 100%; */
+}
+.rb > * {
+  position: absolute;
+  width: 100%; height: 100%;
+  outline: none;
+}
+.rb:not(:focus) > .toggle {
+  z-index: -1;
+}
+
+/* Selection */
+.rb > div {
+  background: aqua;
+  position: absolute;
+  width: 100%; height: 100%;
+  transform: scale(0.4);
+  opacity: 0.0;
+  transition: opacity 0.2s;
+  /* border-radius: 100%; */
+}
+.rb:hover > div {
+  opacity: 0.2;
+}
+.rb:focus > div, :not(:focus-within) > [default].rb > div {
+  opacity: 0.8;
+}
+

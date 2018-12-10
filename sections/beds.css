@@ -1,0 +1,16 @@
+#beds .split .left p:first-child {
+  margin-top: 0;
+}
+
+#portable img:not(:first-child) {
+  width: calc(50% - 3px);
+  display: inline;
+
+  /* TODO: Disallowed */
+  /* vertical-align: middle; */
+}
+
+img.anti-pattern { transform: translateY(-25%); }
+img.anti-pattern.enlarge:not(:focus):hover {
+  transform: translateY(-25%) scale(1.08);
+}

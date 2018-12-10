@@ -1,0 +1,61 @@
+/*
+
+  A split is a container with a left,
+  and a right part, where the right
+  part has a lower priority than the
+  left.
+
+  If you give the split the `flip` class
+  the priority will be flipped;
+
+HTML:
+
+  <div class='split'>
+    <div class='left'>
+      <!-- Left content -->
+    </div>
+
+    <div class='right'>
+      <!-- Right content -->
+    </div>
+  </div>
+
+*/
+
+
+.split { display: flex; }
+.split .left  { width: 100%; position: relative; }
+.split .right { width: 80%;  position: relative; }
+.split.flip .left  { width: 80%; }
+.split.flip .right { width: 100%; }
+
+.split.flip .left       { margin-left: 20px; }
+.split:not(.flip) .left { margin-right: 20px; }
+
+.split > * > img {
+  width: 100%;
+}
+
+.split.flip {
+  /* flex-direction: row-reverse; */
+}
+
+
+@media screen and (max-width: 600px) {
+  .split > * { width: 100% !important; }
+  .split { text-align: unset; }
+  .split .left, .split .right { margin-left: 0 !important; }
+  .split {
+    /* flex-direction: column; */
+    display: table !important;
+  }
+  .split.flip .left { display: table-header-group; }
+}
+
+@media screen and (min-width: 600px) {
+  .split.flip .left  { text-align: left; }
+  .split.flip .right { text-align: right; }
+  .split .left  { text-align: right; }
+  .split .right { text-align: left; }
+}
+

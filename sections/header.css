@@ -1,0 +1,81 @@
+header {
+  margin-bottom: 10px;
+  background: rgba(0,0,0,0.9);
+}
+
+#top-part {
+  --moon-size: 70px;
+  display: flex;
+  margin-bottom: var(--space);
+}
+
+#main-title {
+  transform: translateX(calc(var(--moon-size)/-2.9));
+  font-size: calc(var(--moon-size)/2.3);
+  margin: auto 0;
+}
+
+#top-menu {
+  display: flex;
+  /* justify-content: center; */
+  /* text-transform: capitalize; */
+  font-family: monospace;
+}
+#top-menu .wrapper {
+  display: contents;
+  width: 80%;
+}
+#top-menu a { margin: auto; }
+
+
+/* Collapse to one row */
+@media screen and ( min-width: 600px ) and ( max-width: 900px ) {
+  header    { display: flex; }
+  #top-part { margin-bottom: 0; }
+  #top-menu { width: 100%; }
+}
+
+@media screen and ( min-width: 900px ) {
+  #top-part {
+    --moon-size: 150px !important;
+  }
+  #top-menu a {
+    font-size: 16px;
+  }
+}
+
+@media screen and ( max-width: 450px ) {
+  #top-menu .wrapper { width: 100%; }
+}
+
+
+/* ------- Main moon ------- */
+
+/* I wanted the moon hover animation to dim all text on the page */
+/* on desktop, and because of the no-javascript rule I had to put */
+/* it at the beginning of the DOM tree */
+
+#main-moon, #moon-main-title {
+  display: none;
+}
+
+@media screen and ( min-width: 900px ) {
+  #main-moon {
+    --moon-size: 150px;
+    margin: auto;
+    display: block;
+    transform: translateX(calc(-50% - 25px));
+  }
+  #moon-main-title {
+    transform: translate(20px, calc(-75px - 40%));
+    font-size: 65px;
+    display: block;
+
+    /* pointer-events is not allowed */
+    /* pointer-events: none; */
+    width: 0;
+    transform: translate(calc(20px - 110px), calc(-75px - 40%));
+  }
+  #top-part { display: none; }
+}
+

@@ -1,0 +1,24 @@
+#the-clock {
+  --sec:  0.1;
+  --min:  0.7;
+  --hour: 0.4;
+
+  background:   none;
+  --color-sec:  white;
+  --color-min:  blue;
+  --color-hour: red;
+
+  margin-left: auto;
+  margin-right: auto;
+  top: calc(50% - 100px);
+}
+
+#clock .split .right {
+  width: 45%;
+}
+
+@media screen and (max-width: 600px) {
+  #clock .split { display: block; }
+  #clock .split .left { margin-left: 0px; }
+  #clock .split .right { margin-top: calc(var(--space)*1); }
+}

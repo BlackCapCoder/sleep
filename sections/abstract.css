@@ -1,0 +1,188 @@
+/* ------ Colorcode ----- */
+
+#colorcode-box {
+  width: calc(50% - 35px);
+}
+#colorcode {
+  margin-top: 20px;
+  width: 25px;
+  height: 25px;
+  background: aqua;
+  position: relative;
+  display: inline-block;
+}
+#colorcode > div {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  position: absolute;
+}
+#colorcode + span {
+  display: inline-block;
+  transform: translateY(-6px);
+  margin-left: 5px;
+}
+
+
+/* ------- Radio buttons --------- */
+
+#abstract .rb {
+  width: 14px;
+  height: 14px;
+  margin-top: 20px;
+  transform: translateY(-5px);
+  margin-left: 5px;
+}
+#abstract .rb.space {
+  margin-right: calc(50% - 35px);
+}
+
+#see-spi:focus ~ .wrapper > .chart-box:not([name='animals']) {
+  display: none;
+}
+#see-spi:focus ~ .wrapper > .chart-box[name='animals'] {
+  width: 100%;
+}
+#see-spi:focus ~ .wrapper > .chart-box #chart-all {
+  max-width: 100%;
+}
+
+#see-age:focus ~ .wrapper > .chart-box:not([name='humans']) {
+  display: none;
+}
+#see-age:focus ~ .wrapper > .chart-box[name='humans'] {
+  width: 100%;
+}
+#see-age:focus ~ .wrapper > .chart-box #chart-humans {
+}
+
+
+/* ------------- Charts --------------- */
+
+.chart-box {
+  width: calc(50% - 8px);
+  margin: auto;
+}
+.chart-box .chart {
+  transition: max-width 1s;
+}
+
+.chart-box .chart > .item {
+  filter: hue-rotate(0deg);
+  transition: 0.1s ease;
+}
+.chart-box .chart > .item:hover {
+  filter: hue-rotate(30deg);
+  transform: scale(1.03);
+}
+
+@media screen and (max-width: 700px) {
+  .chart-box {
+    width: 100% !important;
+  }
+  #chart-all {
+    margin-bottom: calc(var(--space)*2);
+  }
+  #abstract .rb { display: none; }
+  #colorcode-box { width: 100%; }
+}
+
+
+.chart-cont {
+  /* display: flex; */
+  /* flex-wrap: wrap-reverse; /* TODO: Disallowed */ */
+  width: 100%;
+}
+
+/* Boilerplate to avoid `flex-wrap: wrap-reverse` */
+.chart-cont { display: table; width: 100%; }
+.chart-cont .wrapper { display: table-caption; }
+#colorcode-box { display: inline-block; }
+.chart-box { display: inline-block; }
+
+
+
+#chart-humans {
+  max-width: 650px;
+
+  --color-bot:   aqua;
+  --color-top-A: rgba(0,0,0,0.3);
+  --color-top-B: rgba(0,0,0,0.6);
+
+  --height: 35vh;
+
+  --min: 8;
+  --max: 17;
+  --start: 6;
+  --cnt: 8;
+
+  --a-A: 14; --a-B: 3;
+  --b-A: 12; --b-B: 3;
+  --c-A: 11; --c-B: 3;
+  --d-A: 10; --d-B: 3;
+  --e-A:  9; --e-B: 2;
+  --f-A:  8; --f-B: 2;
+  --g-A:  7; --g-B: 2;
+  --h-A:  7; --h-B: 1;
+}
+
+#chart-all {
+  --min: 1.9;
+  --max: 19.9;
+  --start: 1;
+  --cnt: 45;
+
+  --color-bot:   aqua;
+  --color-top-A: rgba(0,0,0,0.3);
+  --color-top-B: rgba(0,0,0,0.6);
+
+  --height: 35vh;
+  max-width: 650px;
+
+  --a-A: 19.9;
+  --b-A: 18.1;
+  --c-A: 18;
+  --d-A: 18;
+  --e-A: 17.0;
+  --f-A: 16;
+  --g-A: 15.8;
+  --h-A: 15.8;
+  --i-A: 14.9;
+  --j-A: 14.6;
+  --k-A: 14.5;
+  --l-A: 14.4;
+  --m-A: 14.3;
+  --n-A: 14.0;
+  --o-A: 13.5;
+  --p-A: 13.1;
+  --q-A: 12.6;
+  --r-A: 12.1;
+  --s-A: 12.1;
+  --t-A: 12.1;
+  --u-A: 11.8;
+  --v-A: 11.4;
+  --w-A: 10.8;
+  --x-A: 10.8;
+  --y-A: 10.6;
+  --z-A: 10.4;
+  --A-A: 10.3;
+  --B-A: 10.3;
+  --C-A: 10.1;
+  --D-A: 9.9;
+  --E-A: 9.7;
+  --F-A: 9.4;
+  --G-A: 8;
+  --H-A: 7.8;
+  --I-A: 7;
+  --J-A: 6.2;
+  --K-A: 5.5;
+  --L-A: 5.3;
+  --M-A: 3.9;
+  --N-A: 3.9;
+  --O-A: 3.8;
+  --P-A: 2.0;
+  --Q-A: 3.1;
+  --R-A: 2.9;
+  --S-A: 1.9;
+}
+

@@ -1,0 +1,101 @@
+/*
+Settings:
+  --color-sec    The color of the second hand
+  --color-min    The color of the minute hand
+  --color-hour   The color of the hour   hand
+  --sec          Initial position of second hand (0-1)
+  --min          Initial position of minute hand (0-1)
+  --hour         Initial position of hour   hand (0-1)
+
+HTML:
+  <div class="clock">
+    <div class="digit" name= '1'><span>1</span></div>
+    <div class="digit" name= '2'><span>2</span></div>
+    <div class="digit" name= '3'><span>3</span></div>
+    <div class="digit" name= '4'><span>4</span></div>
+    <div class="digit" name= '5'><span>5</span></div>
+    <div class="digit" name= '6'><span>6</span></div>
+    <div class="digit" name= '7'><span>7</span></div>
+    <div class="digit" name= '8'><span>8</span></div>
+    <div class="digit" name= '9'><span>9</span></div>
+    <div class="digit" name='10'><span>10</span></div>
+    <div class="digit" name='11'><span>11</span></div>
+    <div class="digit" name='12'><span>12</span></div>
+
+    <div class="hand sec"><div></div></div>
+    <div class="hand min"><div></div></div>
+    <div class="hand hour"><div></div></div>
+  </div>
+*/
+
+
+/* Styling */
+.clock {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  font-size: 20px;
+}
+.clock > * {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+}
+.clock .digit span {
+  position: absolute;
+  top: -10px; right: -10px;
+}
+
+
+/* Clock hands */
+.clock > .hand > div {
+  position: absolute;
+  left: 50%;
+  width: 40%;
+}
+
+.clock > .hand.sec  > div { outline: 1px solid var(--color-sec);  }
+.clock > .hand.min  > div { outline: 1px solid var(--color-min);  }
+.clock > .hand.hour > div { outline: 1px solid var(--color-hour); }
+
+
+/* Ticking animation */
+.clock .hand.sec  { --time: var(--sec ); animation: var(--disable-animations, tick) calc(60s          ) infinite linear; }
+.clock .hand.min  { --time: var(--min ); animation: var(--disable-animations, tick) calc(60s * 60     ) infinite linear; }
+.clock .hand.hour { --time: var(--hour); animation: var(--disable-animations, tick) calc(60s * 60 * 12) infinite linear; }
+
+@keyframes tick {
+  from { transform: rotate(calc(360deg * var(--time) - 90deg)); }
+  to   { transform: rotate(calc(360deg * var(--time) - 90deg + 360deg)); }
+}
+
+
+/* Position the numbers */
+.clock .digit[name='3']  { transform: rotate(calc(30deg *  0)); }
+.clock .digit[name='4']  { transform: rotate(calc(30deg *  1)); }
+.clock .digit[name='5']  { transform: rotate(calc(30deg *  2)); }
+.clock .digit[name='6']  { transform: rotate(calc(30deg *  3)); }
+.clock .digit[name='7']  { transform: rotate(calc(30deg *  4)); }
+.clock .digit[name='8']  { transform: rotate(calc(30deg *  5)); }
+.clock .digit[name='9']  { transform: rotate(calc(30deg *  6)); }
+.clock .digit[name='10'] { transform: rotate(calc(30deg *  7)); }
+.clock .digit[name='11'] { transform: rotate(calc(30deg *  8)); }
+.clock .digit[name='12'] { transform: rotate(calc(30deg *  9)); }
+.clock .digit[name='1']  { transform: rotate(calc(30deg * 10)); }
+.clock .digit[name='2']  { transform: rotate(calc(30deg * 11)); }
+
+/* Rotate the numbers right way up */
+.clock .digit[name='3']  span { transform: rotate(calc(-30deg * 0));  }
+.clock .digit[name='4']  span { transform: rotate(calc(-30deg * 1));  }
+.clock .digit[name='5']  span { transform: rotate(calc(-30deg * 2));  }
+.clock .digit[name='6']  span { transform: rotate(calc(-30deg * 3));  }
+.clock .digit[name='7']  span { transform: rotate(calc(-30deg * 4));  }
+.clock .digit[name='8']  span { transform: rotate(calc(-30deg * 5));  }
+.clock .digit[name='9']  span { transform: rotate(calc(-30deg * 6));  }
+.clock .digit[name='10'] span { transform: rotate(calc(-30deg * 7));  }
+.clock .digit[name='11'] span { transform: rotate(calc(-30deg * 8));  }
+.clock .digit[name='12'] span { transform: rotate(calc(-30deg * 9));  }
+.clock .digit[name='1']  span { transform: rotate(calc(-30deg * 10)); }
+.clock .digit[name='2']  span { transform: rotate(calc(-30deg * 11)); }
+

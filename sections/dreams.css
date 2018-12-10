@@ -1,0 +1,357 @@
+.dream {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: var(--height, 200px);
+  overflow: hidden;
+}
+
+#dream-box {
+  --height: 300px;
+  min-height: var(--height);
+
+  animation:
+    var(--disable-animations, var(--disable-strobe, strobe))
+    60s
+    infinite
+    ease;
+}
+
+#dreams .dream {
+  --tps: var(--dream-tps, 0);
+  --bin-speed: calc(var(--bin-res) / var(--tps));
+}
+
+
+.particle {
+  /* Can be used to animate smoothely between frames on a low tps */
+  /* transition: transform calc(1s / var(--tps)) linear; */
+}
+
+.particle {
+  position: absolute;
+  width:  calc(var(--diameter, 10) * 1px);
+  height: calc(var(--diameter, 10) * 1px);
+
+  --x: var(--bin);
+  --sangle: calc(var(--x) * 3.141592 * var(--angf, 1));
+
+
+  /* left: calc( var(--diameter, 10) * -1px */
+  /*           + (100vw + var(--diameter, 10) * 1px) * var(--x) */
+  /*           ); */
+  /*  */
+  /* top: calc( (100% - var(--diameter, 10) * 1px)/2 */
+  /*          + (100% - var(--diameter, 10) * 1px)/2 */
+  /*          * ( var(--sin) * var(--sinA, 1) ) */
+  /*          ) */
+
+  /* transform is faster */
+  transform:
+    translate( calc( -100% + (100vw + 100%) * var(--x)
+                   - (var(--bin0) * 30vw)
+                   )
+             , calc( (var(--height) - 100%)/2
+                   + (var(--height) - 100%)/2
+                   * ( var(--sin) * var(--sinA, 1)
+                     )
+                   )
+             )
+    rotate( calc( 360deg * var(--init-rot, 0)
+                + 360deg * var(--x) * var(--rot, 1)
+                )
+          );
+}
+
+
+@keyframes strobe {
+  from { filter: hue-rotate(0deg); }
+  to   { filter: hue-rotate(360deg); }
+}
+
+
+/* -------------------------- */
+
+
+.particle {
+  --q: calc(var(--i)/200);
+  --v: calc((var(--q) - 0.5)*2);
+
+  --angf: calc(1 + var(--q)/2);
+  --init-rot: calc(var(--v)*5);
+  --rot: calc(0.5 + var(--v));
+  /* opacity: calc(var(--q) + 0.4); */
+
+  --t: var(--bin2);
+  --bin: calc(var(--t) * (var(--q)*0.5 + 1));
+
+  opacity:    calc(1 - var(--t)*var(--t));
+  --diameter: calc(3.0 + var(--q)*1.5 - 4.0 * var(--t) * var(--t) * var(--t));
+}
+.particle:nth-child(2n) {
+  --sinA: -1.0;
+  background: pink;
+  --bin: calc(var(--t) * (var(--q)*0.5 + 1));
+}
+.particle:nth-child(4n) {
+  --sinA: -0.8;
+  background: purple;
+
+  --t: var(--bin2);
+  --bin: calc(var(--t) * (var(--v)*1.2 + 1));
+}
+.particle:nth-child(6n) {
+  --sinA: -0.6 - var(--q)/5;
+}
+*.particle:nth-child(8n) {
+  --sinA: -0.4;
+}
+.particle:nth-child(10n) {
+  --sinA: -0.2;
+  /* --angf: calc(var(--v)); */
+}
+.particle:nth-child(2n+1) {
+  /* --bin:  calc(var(--bin0) - 0.10 + var(--q)*0.1); */
+  --sinA: 1.0;
+  background: orange;
+  --bin: calc(var(--t) * (var(--q)*0.5 + 0));
+}
+.particle:nth-child(4n+1) {
+  --sinA: 0.8;
+  background: hotpink;
+
+  --t: var(--bin1);
+  --bin: calc(var(--bin1) * (var(--q)*1.4 + 1));
+}
+.particle:nth-child(6n+1) {
+  --sinA: 0.6;
+  --t: var(--bin2);
+  --bin: calc(var(--t) * (var(--v)*0.8 + 1.2));
+}
+.particle:nth-child(8n+1) {
+  --sinA: 0.4;
+}
+.particle:nth-child(10n+1) {
+  --sinA: 0.2;
+}
+.particle:nth-child(11n) {
+  --sinA: calc(1 - var(--q)/2);
+  --t: var(--bin0);
+  --bin: calc( var(--q) * (0.3 + var(--t)) * var(--t) * 20
+             - var(--q) * var(--t) * var(--t) * 8
+             );
+  /* --angf: calc( (1 - var(--t))*var(--q) ); */
+  background: indigo ;
+  /* --diameter: calc(2.5 + var(--v)*0.5); */
+}
+.particle:nth-child(49n) {
+  --diameter: calc(12.0 + var(--v)*6);
+  --rot: calc(var(--sin));
+  background: MediumVioletRed ;
+  --t: var(--bin0);
+  --bin: calc(var(--t) + var(--v)/4 - (0.3 - var(--t)));
+  opacity: calc( (var(--t) - 0.02) * 3 * (0.95 - var(--t))
+               )
+}
+
+
+.particle:nth-child(1)  { --i:  0; }
+.particle:nth-child(2)  { --i:  1; }
+.particle:nth-child(3)  { --i:  2; }
+.particle:nth-child(4)  { --i:  3; }
+.particle:nth-child(5)  { --i:  4; }
+.particle:nth-child(6)  { --i:  5; }
+.particle:nth-child(7)  { --i:  6; }
+.particle:nth-child(8)  { --i:  7; }
+.particle:nth-child(9)  { --i:  8; }
+.particle:nth-child(10) { --i:  9; }
+.particle:nth-child(11) { --i: 10; }
+.particle:nth-child(12) { --i: 11; }
+.particle:nth-child(13) { --i: 12; }
+.particle:nth-child(14) { --i: 13; }
+.particle:nth-child(15) { --i: 14; }
+.particle:nth-child(16) { --i: 15; }
+.particle:nth-child(17) { --i: 16; }
+.particle:nth-child(18) { --i: 17; }
+.particle:nth-child(19) { --i: 18; }
+.particle:nth-child(20) { --i: 19; }
+.particle:nth-child(21) { --i: 20; }
+.particle:nth-child(22) { --i: 21; }
+.particle:nth-child(23) { --i: 22; }
+.particle:nth-child(24) { --i: 23; }
+.particle:nth-child(25) { --i: 24; }
+.particle:nth-child(26) { --i: 25; }
+.particle:nth-child(27) { --i: 26; }
+.particle:nth-child(28) { --i: 27; }
+.particle:nth-child(29) { --i: 28; }
+.particle:nth-child(30) { --i: 29; }
+.particle:nth-child(31) { --i: 30; }
+.particle:nth-child(32) { --i: 31; }
+.particle:nth-child(33) { --i: 32; }
+.particle:nth-child(34) { --i: 33; }
+.particle:nth-child(35) { --i: 34; }
+.particle:nth-child(36) { --i: 35; }
+.particle:nth-child(37) { --i: 36; }
+.particle:nth-child(38) { --i: 37; }
+.particle:nth-child(39) { --i: 38; }
+.particle:nth-child(40) { --i: 39; }
+.particle:nth-child(41) { --i: 40; }
+.particle:nth-child(42) { --i: 41; }
+.particle:nth-child(43) { --i: 42; }
+.particle:nth-child(44) { --i: 43; }
+.particle:nth-child(45) { --i: 44; }
+.particle:nth-child(46) { --i: 45; }
+.particle:nth-child(47) { --i: 46; }
+.particle:nth-child(48) { --i: 47; }
+.particle:nth-child(49) { --i: 48; }
+.particle:nth-child(50) { --i: 49; }
+.particle:nth-child(51) { --i: 50; }
+.particle:nth-child(52) { --i: 51; }
+.particle:nth-child(53) { --i: 52; }
+.particle:nth-child(54) { --i: 53; }
+.particle:nth-child(55) { --i: 54; }
+.particle:nth-child(56) { --i: 55; }
+.particle:nth-child(57) { --i: 56; }
+.particle:nth-child(58) { --i: 57; }
+.particle:nth-child(59) { --i: 58; }
+.particle:nth-child(60) { --i: 59; }
+.particle:nth-child(61) { --i: 60; }
+.particle:nth-child(62) { --i: 61; }
+.particle:nth-child(63) { --i: 62; }
+.particle:nth-child(64) { --i: 63; }
+.particle:nth-child(65) { --i: 64; }
+.particle:nth-child(66) { --i: 65; }
+.particle:nth-child(67) { --i: 66; }
+.particle:nth-child(68) { --i: 67; }
+.particle:nth-child(69) { --i: 68; }
+.particle:nth-child(70) { --i: 69; }
+.particle:nth-child(71) { --i: 70; }
+.particle:nth-child(72) { --i: 71; }
+.particle:nth-child(73) { --i: 72; }
+.particle:nth-child(74) { --i: 73; }
+.particle:nth-child(75) { --i: 74; }
+.particle:nth-child(76) { --i: 75; }
+.particle:nth-child(77) { --i: 76; }
+.particle:nth-child(78) { --i: 77; }
+.particle:nth-child(79) { --i: 78; }
+.particle:nth-child(80) { --i: 79; }
+.particle:nth-child(81) { --i: 80; }
+.particle:nth-child(82) { --i: 81; }
+.particle:nth-child(83) { --i: 82; }
+.particle:nth-child(84) { --i: 83; }
+.particle:nth-child(85) { --i: 84; }
+.particle:nth-child(86) { --i: 85; }
+.particle:nth-child(87) { --i: 86; }
+.particle:nth-child(88) { --i: 87; }
+.particle:nth-child(89) { --i: 88; }
+.particle:nth-child(90) { --i: 89; }
+.particle:nth-child(91) { --i: 90; }
+.particle:nth-child(92) { --i: 91; }
+.particle:nth-child(93) { --i: 92; }
+.particle:nth-child(94) { --i: 93; }
+.particle:nth-child(95) { --i: 94; }
+.particle:nth-child(96) { --i: 95; }
+.particle:nth-child(97) { --i: 96; }
+.particle:nth-child(98) { --i: 97; }
+.particle:nth-child(99) { --i: 98; }
+.particle:nth-child(100) { --i: 99; }
+.particle:nth-child(101) { --i: 100; }
+.particle:nth-child(102) { --i: 101; }
+.particle:nth-child(103) { --i: 102; }
+.particle:nth-child(104) { --i: 103; }
+.particle:nth-child(105) { --i: 104; }
+.particle:nth-child(106) { --i: 105; }
+.particle:nth-child(107) { --i: 106; }
+.particle:nth-child(108) { --i: 107; }
+.particle:nth-child(109) { --i: 108; }
+.particle:nth-child(110) { --i: 109; }
+.particle:nth-child(111) { --i: 110; }
+.particle:nth-child(112) { --i: 111; }
+.particle:nth-child(113) { --i: 112; }
+.particle:nth-child(114) { --i: 113; }
+.particle:nth-child(115) { --i: 114; }
+.particle:nth-child(116) { --i: 115; }
+.particle:nth-child(117) { --i: 116; }
+.particle:nth-child(118) { --i: 117; }
+.particle:nth-child(119) { --i: 118; }
+.particle:nth-child(120) { --i: 119; }
+.particle:nth-child(121) { --i: 120; }
+.particle:nth-child(122) { --i: 121; }
+.particle:nth-child(123) { --i: 122; }
+.particle:nth-child(124) { --i: 123; }
+.particle:nth-child(125) { --i: 124; }
+.particle:nth-child(126) { --i: 125; }
+.particle:nth-child(127) { --i: 126; }
+.particle:nth-child(128) { --i: 127; }
+.particle:nth-child(129) { --i: 128; }
+.particle:nth-child(130) { --i: 129; }
+.particle:nth-child(131) { --i: 130; }
+.particle:nth-child(132) { --i: 131; }
+.particle:nth-child(133) { --i: 132; }
+.particle:nth-child(134) { --i: 133; }
+.particle:nth-child(135) { --i: 134; }
+.particle:nth-child(136) { --i: 135; }
+.particle:nth-child(137) { --i: 136; }
+.particle:nth-child(138) { --i: 137; }
+.particle:nth-child(139) { --i: 138; }
+.particle:nth-child(140) { --i: 139; }
+.particle:nth-child(141) { --i: 140; }
+.particle:nth-child(142) { --i: 141; }
+.particle:nth-child(143) { --i: 142; }
+.particle:nth-child(144) { --i: 143; }
+.particle:nth-child(145) { --i: 144; }
+.particle:nth-child(146) { --i: 145; }
+.particle:nth-child(147) { --i: 146; }
+.particle:nth-child(148) { --i: 147; }
+.particle:nth-child(149) { --i: 148; }
+.particle:nth-child(150) { --i: 149; }
+.particle:nth-child(151) { --i: 150; }
+.particle:nth-child(152) { --i: 151; }
+.particle:nth-child(153) { --i: 152; }
+.particle:nth-child(154) { --i: 153; }
+.particle:nth-child(155) { --i: 154; }
+.particle:nth-child(156) { --i: 155; }
+.particle:nth-child(157) { --i: 156; }
+.particle:nth-child(158) { --i: 157; }
+.particle:nth-child(159) { --i: 158; }
+.particle:nth-child(160) { --i: 159; }
+.particle:nth-child(161) { --i: 160; }
+.particle:nth-child(162) { --i: 161; }
+.particle:nth-child(163) { --i: 162; }
+.particle:nth-child(164) { --i: 163; }
+.particle:nth-child(165) { --i: 164; }
+.particle:nth-child(166) { --i: 165; }
+.particle:nth-child(167) { --i: 166; }
+.particle:nth-child(168) { --i: 167; }
+.particle:nth-child(169) { --i: 168; }
+.particle:nth-child(170) { --i: 169; }
+.particle:nth-child(171) { --i: 170; }
+.particle:nth-child(172) { --i: 171; }
+.particle:nth-child(173) { --i: 172; }
+.particle:nth-child(174) { --i: 173; }
+.particle:nth-child(175) { --i: 174; }
+.particle:nth-child(176) { --i: 175; }
+.particle:nth-child(177) { --i: 176; }
+.particle:nth-child(178) { --i: 177; }
+.particle:nth-child(179) { --i: 178; }
+.particle:nth-child(180) { --i: 179; }
+.particle:nth-child(181) { --i: 180; }
+.particle:nth-child(182) { --i: 181; }
+.particle:nth-child(183) { --i: 182; }
+.particle:nth-child(184) { --i: 183; }
+.particle:nth-child(185) { --i: 184; }
+.particle:nth-child(186) { --i: 185; }
+.particle:nth-child(187) { --i: 186; }
+.particle:nth-child(188) { --i: 187; }
+.particle:nth-child(189) { --i: 188; }
+.particle:nth-child(190) { --i: 189; }
+.particle:nth-child(191) { --i: 190; }
+.particle:nth-child(192) { --i: 191; }
+.particle:nth-child(193) { --i: 192; }
+.particle:nth-child(194) { --i: 193; }
+.particle:nth-child(195) { --i: 194; }
+.particle:nth-child(196) { --i: 195; }
+.particle:nth-child(197) { --i: 196; }
+.particle:nth-child(198) { --i: 197; }
+.particle:nth-child(199) { --i: 198; }
+.particle:nth-child(200) { --i: 199; }

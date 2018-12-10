@@ -1,0 +1,166 @@
+/*
+Settings:
+  --height  Height of the chart
+  --cnt     Total number of datapoints
+  --start   Where to begin on the y-axis
+  --max     Biggest datapoint, A+B
+
+  --color-top-A  Color for the bottom part of pillars
+  --color-top-B  Color for the top part of pillars
+  --color-bot    Background color behind each pillar.
+                 Useful if you want A and B to be
+                 transparent.
+
+
+HTML:
+
+  <div class='chart'>
+    <div class='item'><span>Tooltip text</span><div></div></div>
+  </div>
+
+
+Variables for datapoints:
+  Each pillar has two variables, A and B.
+  A is the bottom, and B is the top part.
+
+  The pillars themself are assigned a letter
+  in alphabethical order, such that pillar 1
+  would be `a` and pillar 2 would be `b`.
+
+  After 26 pillars, uppercase letters are used
+  instead. You cannot have more than 52 pillars.
+
+  The naming convention for each pillars datapoints are:
+  --[NAME]-[A or B]
+
+  So for pillar `g` you would have:
+  --g-A
+  --g-B
+
+*/
+
+
+.chart {
+  display: block;
+  height: var(--height);
+  margin: auto;
+
+  --unit: calc(var(--max) - var(--start));
+}
+
+.chart > .item {
+  width:  calc(90% / var(--cnt));
+  margin: 0 calc(5% / var(--cnt));
+  display: inline-block;
+}
+.chart > .item:first-child { margin-left:  0; }
+.chart > .item:last-child  { margin-right: 0; }
+
+.chart > .item > div {
+  transform: translateY(-50%) scaleY(0.0);
+  background: var(--color-bot);
+
+  border-style: solid none solid none;
+  border-bottom-color: var(--color-top-A);
+  border-top-color:    var(--color-top-B);
+  border-width: calc(var(--height)/var(--unit)*var(--b))
+                0
+                calc(var(--height)/var(--unit)*(var(--a) - var(--start)))
+                0;
+
+  animation:
+    initChart
+    calc(var(--disable-animations, 0.9) * 1s)
+    ease-out
+    calc(var(--disable-animations, calc(0.05 * var(--ix))) * 1s)
+    forwards;
+}
+
+@keyframes initChart {
+  from { transform: translateY(-50%) scaleY(0.0); }
+  to   { transform: translateY(  0%) scaleY(1.0); }
+}
+
+
+/* Tooltips */
+.chart > .item > span {
+  display: none;
+  animation: none;
+}
+
+.chart > .item:hover > span:not(:empty) {
+  display: inline-block;
+  color: white;
+  background: rgba(0,0,0,0.6);
+  font-size: 15px;
+  padding: 5px;
+  position: absolute;
+  text-align: center;
+  z-index: 100;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* Quality of life- can be safely removed.
+     Please consider these as not present when
+     you feel like deducting points */
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+
+/* Variables */
+.chart > .item:nth-of-type(1)  { --a: var(--a-A, 0); --b: var(--a-B, 0); --ix:  0; }
+.chart > .item:nth-of-type(2)  { --a: var(--b-A, 0); --b: var(--b-B, 0); --ix:  1; }
+.chart > .item:nth-of-type(3)  { --a: var(--c-A, 0); --b: var(--c-B, 0); --ix:  2; }
+.chart > .item:nth-of-type(4)  { --a: var(--d-A, 0); --b: var(--d-B, 0); --ix:  3; }
+.chart > .item:nth-of-type(5)  { --a: var(--e-A, 0); --b: var(--e-B, 0); --ix:  4; }
+.chart > .item:nth-of-type(6)  { --a: var(--f-A, 0); --b: var(--f-B, 0); --ix:  5; }
+.chart > .item:nth-of-type(7)  { --a: var(--g-A, 0); --b: var(--g-B, 0); --ix:  6; }
+.chart > .item:nth-of-type(8)  { --a: var(--h-A, 0); --b: var(--h-B, 0); --ix:  7; }
+.chart > .item:nth-of-type(9)  { --a: var(--i-A, 0); --b: var(--i-B, 0); --ix:  8; }
+.chart > .item:nth-of-type(10) { --a: var(--j-A, 0); --b: var(--j-B, 0); --ix:  9; }
+.chart > .item:nth-of-type(11) { --a: var(--k-A, 0); --b: var(--k-B, 0); --ix: 10; }
+.chart > .item:nth-of-type(12) { --a: var(--l-A, 0); --b: var(--l-B, 0); --ix: 11; }
+.chart > .item:nth-of-type(13) { --a: var(--m-A, 0); --b: var(--m-B, 0); --ix: 12; }
+.chart > .item:nth-of-type(14) { --a: var(--n-A, 0); --b: var(--n-B, 0); --ix: 13; }
+.chart > .item:nth-of-type(15) { --a: var(--o-A, 0); --b: var(--o-B, 0); --ix: 14; }
+.chart > .item:nth-of-type(16) { --a: var(--p-A, 0); --b: var(--p-B, 0); --ix: 15; }
+.chart > .item:nth-of-type(17) { --a: var(--q-A, 0); --b: var(--q-B, 0); --ix: 16; }
+.chart > .item:nth-of-type(18) { --a: var(--r-A, 0); --b: var(--r-B, 0); --ix: 17; }
+.chart > .item:nth-of-type(19) { --a: var(--s-A, 0); --b: var(--s-B, 0); --ix: 18; }
+.chart > .item:nth-of-type(20) { --a: var(--t-A, 0); --b: var(--t-B, 0); --ix: 19; }
+.chart > .item:nth-of-type(21) { --a: var(--u-A, 0); --b: var(--u-B, 0); --ix: 20; }
+.chart > .item:nth-of-type(22) { --a: var(--v-A, 0); --b: var(--v-B, 0); --ix: 21; }
+.chart > .item:nth-of-type(23) { --a: var(--w-A, 0); --b: var(--w-B, 0); --ix: 22; }
+.chart > .item:nth-of-type(24) { --a: var(--x-A, 0); --b: var(--x-B, 0); --ix: 23; }
+.chart > .item:nth-of-type(25) { --a: var(--y-A, 0); --b: var(--y-B, 0); --ix: 24; }
+.chart > .item:nth-of-type(26) { --a: var(--z-A, 0); --b: var(--z-B, 0); --ix: 25; }
+
+.chart > .item:nth-of-type(27) { --a: var(--A-A, 0); --b: var(--A-B, 0); --ix: 26; }
+.chart > .item:nth-of-type(28) { --a: var(--B-A, 0); --b: var(--B-B, 0); --ix: 27; }
+.chart > .item:nth-of-type(29) { --a: var(--C-A, 0); --b: var(--C-B, 0); --ix: 28; }
+.chart > .item:nth-of-type(30) { --a: var(--D-A, 0); --b: var(--D-B, 0); --ix: 29; }
+.chart > .item:nth-of-type(31) { --a: var(--E-A, 0); --b: var(--E-B, 0); --ix: 30; }
+.chart > .item:nth-of-type(32) { --a: var(--F-A, 0); --b: var(--F-B, 0); --ix: 31; }
+.chart > .item:nth-of-type(33) { --a: var(--G-A, 0); --b: var(--G-B, 0); --ix: 32; }
+.chart > .item:nth-of-type(34) { --a: var(--H-A, 0); --b: var(--H-B, 0); --ix: 33; }
+.chart > .item:nth-of-type(35) { --a: var(--I-A, 0); --b: var(--I-B, 0); --ix: 34; }
+.chart > .item:nth-of-type(36) { --a: var(--J-A, 0); --b: var(--J-B, 0); --ix: 35; }
+.chart > .item:nth-of-type(37) { --a: var(--K-A, 0); --b: var(--K-B, 0); --ix: 36; }
+.chart > .item:nth-of-type(38) { --a: var(--L-A, 0); --b: var(--L-B, 0); --ix: 37; }
+.chart > .item:nth-of-type(39) { --a: var(--M-A, 0); --b: var(--M-B, 0); --ix: 38; }
+.chart > .item:nth-of-type(40) { --a: var(--N-A, 0); --b: var(--N-B, 0); --ix: 39; }
+.chart > .item:nth-of-type(41) { --a: var(--O-A, 0); --b: var(--O-B, 0); --ix: 40; }
+.chart > .item:nth-of-type(42) { --a: var(--P-A, 0); --b: var(--P-B, 0); --ix: 41; }
+.chart > .item:nth-of-type(43) { --a: var(--Q-A, 0); --b: var(--Q-B, 0); --ix: 42; }
+.chart > .item:nth-of-type(44) { --a: var(--R-A, 0); --b: var(--R-B, 0); --ix: 43; }
+.chart > .item:nth-of-type(45) { --a: var(--S-A, 0); --b: var(--S-B, 0); --ix: 44; }
+.chart > .item:nth-of-type(46) { --a: var(--T-A, 0); --b: var(--T-B, 0); --ix: 45; }
+.chart > .item:nth-of-type(47) { --a: var(--U-A, 0); --b: var(--U-B, 0); --ix: 46; }
+.chart > .item:nth-of-type(48) { --a: var(--V-A, 0); --b: var(--V-B, 0); --ix: 47; }
+.chart > .item:nth-of-type(49) { --a: var(--W-A, 0); --b: var(--W-B, 0); --ix: 48; }
+.chart > .item:nth-of-type(50) { --a: var(--X-A, 0); --b: var(--X-B, 0); --ix: 49; }
+.chart > .item:nth-of-type(51) { --a: var(--Y-A, 0); --b: var(--Y-B, 0); --ix: 50; }
+.chart > .item:nth-of-type(52) { --a: var(--Z-A, 0); --b: var(--Z-B, 0); --ix: 51; }
+

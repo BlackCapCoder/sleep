@@ -1,0 +1,158 @@
+/* ------ Global variables ------ */
+
+:root {
+  --space: 5vmax; /* Unit to use for vertical spacing */
+  --intro: 2s;    /* Fade-in animation on page load */
+
+  /* Ticks per second for the dream particle animation.
+     tps=fps if your computer is fast enough. */
+  --dream-tps: 30;
+  --disable-strobe: 0;
+
+  /* Uncomment this to disable all animations */
+  /* --disable-animations: 0; */
+}
+
+
+/* ---------- Center ---------- */
+
+.center {
+  width: 1100px;
+  max-width: 90%;
+  margin-left: 5%;
+}
+
+@media screen and ( min-width: calc(1100px / 90 * 100) ) {
+  .center {
+    margin-left: calc((100% - 1100px)/2);
+  }
+}
+
+/* --------- Enlargable images ---------- */
+
+img.enlarge {
+  top: 0; left: 0;
+  transition: 0.2s;
+}
+img.enlarge:focus {
+  position: fixed;
+  width: 95%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  outline: none;
+  /* pointer-events: none; */
+}
+img.enlarge:focus ~ .backdrop {
+  display: block;
+  position: fixed;
+  z-index: 99;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+}
+img.enlarge ~ .backdrop { display: none; }
+img.enlarge:not(:focus):hover {
+  transform: scale(1.08);
+}
+
+
+/* Because I cannot use `pointer-events: none`
+   I need this to be able to click off
+   fullscreen images */
+img.enlarge ~ .focus-sink { display: none; }
+img.enlarge:focus ~ .focus-sink {
+  display: block;
+  position: fixed;
+  z-index: 101;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  background: none;
+}
+
+
+/* --------- Fade-in animation ---------- */
+
+.title, h1, h2, h3, h4, h5, h6, a {
+  animation:
+    var(--disable-animations, fadein-color)
+    var(--intro)
+    ease;
+}
+span, p {
+  animation:
+    var(--disable-animations, fadein-color)
+    calc(var(--intro) * 1.5)
+    ease;
+}
+.moon, .chart, .clock, .rb, #colorcode, img {
+  animation:
+    var(--disable-animations, fadein-opacity)
+    calc(var(--intro) * 0.5)
+    ease;
+}
+
+@keyframes fadein-color {
+  from { color: black; }
+  to   { color: white; }
+}
+@keyframes fadein-opacity {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+/* --------- General ---------- */
+
+body {
+  background: black;
+  color:      white;
+  overflow-x: hidden;
+  margin: var(--space) 0;
+}
+
+
+.title {
+  font-family: monospace;
+  text-align:  center;
+  margin: auto;
+  font-size: 35px;
+}
+h3.title {
+  font-size: 22px;
+}
+
+
+#main {
+  font-size: 17px;
+  font-family: arial;
+}
+#main .title {
+  margin-bottom: 15px;
+}
+#main > section {
+  margin-top: var(--space);
+  padding-top: 30px; /* So that hashtag links will scroll
+                        to 30px above the section */
+}
+
+
+/* Remove link decoration */
+a.no-deco {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* A section within a section */
+.subsec {
+  margin-bottom: 35px;
+  display: flex;
+}
+.subsec > p {
+  margin-top: 0;
+}
+section .title ~ .subsec {
+  margin-top: 30px;
+}
+
